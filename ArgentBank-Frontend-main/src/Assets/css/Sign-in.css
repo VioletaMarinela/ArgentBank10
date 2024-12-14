@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+.login-form {
+    box-sizing: border-box;
+    background-color: white;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.sign-in-button {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #61b37b;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.sign-in-icon {
+    font-size: 5rem;
+}
+
+.input-remember {
+    display: flex;
+    margin-bottom: 300px;
+}
+
+.input-remember label {
+    margin-left: 0.25rem;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.input-wrapper label {
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.input-wrapper input {
+    padding: 5px;
+    font-size: 1.2rem;
+}
