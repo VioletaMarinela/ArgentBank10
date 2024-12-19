@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import arrowRightImg from '../../Assets/img/arrow_right.png';
-import { accountuser } from '../../Data/account';
-import { accountService } from '../../_Service/accountService';
-import '../../Assets/css/User.css';
+import { accountuser } from '../../../Data/account';
+import { accountService } from '../../../_Service/accountService';
+import './user.css';
 
 const UserProfile = () => {
     const dispatch = useDispatch();
@@ -66,7 +65,7 @@ const UserProfile = () => {
     }
 
     return (
-        <section>
+        <main className="main bg-dark">
             <div className="header">
 
                 {
@@ -74,11 +73,6 @@ const UserProfile = () => {
                     <div>
                         <h1>Welcome back<br />{firstName} {lastName}!</h1>
                         <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
-                    </div>
-                }
-                {
-                    isEditing &&
-                    <div>
                         <h1>Edit user info</h1>
                         <section className='update'>
                             <div className='input-update'>
@@ -113,19 +107,15 @@ const UserProfile = () => {
                             <p className="account-amount-description">{account.description}</p>
                         </div>
                         <div className="account-content-wrapper cta">
-                            <img
-                                src={arrowRightImg}
-                                alt="Navigate"
-                                onClick={() => navigate(`/somepath/${account.title}`)}
-                                style={{ cursor: 'pointer' }}
-                            />
+                            <button class="transaction-button">View transactions</button>
                         </div>
                     </section>
                 ))
             ) : (
-                <p>No accounts available</p> // Message si aucun compte n’est disponible  
+                <p>No accounts available</p>
             )}
-        </section>
+        </main>
+
     );
 };
 

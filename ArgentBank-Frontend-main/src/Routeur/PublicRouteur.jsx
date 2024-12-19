@@ -3,9 +3,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Home from '../Pages/Public/Home';
 import Signin from '../Pages/Public/Sign-in/Sign-in';
-import Error from '../Pages/Error';
+import Error from '../Pages/Public/Error/Error';
 
-import UserProfile from '../Pages/Auth/UserProfile';
+import UserProfile from '../Pages/Auth/User/UserProfile';
 
 import Layout from '../Layout/Layout';
 
