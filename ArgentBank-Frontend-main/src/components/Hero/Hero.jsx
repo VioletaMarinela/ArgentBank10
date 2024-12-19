@@ -1,9 +1,5 @@
 import React from 'react';
-import '../Assets/css/Hero.css';
-
-
-
-import '../Assets/css/Hero.css';
+import './hero.css';
 
 const Hero = () => {
     return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import Logo from '../../Assets/img/logoAB.webp';
-import '../../Assets/css/main.css';
+import Logo from '../../Assets/img/argentBankLogo.webp';
+import './header.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { accountService } from '../../_Service/accountService';
 
@@ -25,11 +25,11 @@ const Header = () => {
             {
                 accountService.ConnectorNotConnect() &&
                 <div className='userHeaderRight'>
-                    <NavLink to="/userprofile" className="main-nav-item">
+                    <NavLink to="/profile" className="main-nav-item">
                         <span>{userName}</span>
                     </NavLink>
 
-                    <NavLink to="/userprofile" className="main-nav-item">
+                    <NavLink to="/profile" className="main-nav-item">
                         <i className="fa fa-user-circle"></i>
                     </NavLink>
 
@@ -43,7 +43,7 @@ const Header = () => {
             {
                 !accountService.ConnectorNotConnect() &&
                 <nav className='navaccueil'>
-                    <NavLink to="/signin" className="main-nav-item">
+                    <NavLink to="/login" className="main-nav-item">
                         <i className="fa fa-user-circle" />
                         Sign In
                     </NavLink>

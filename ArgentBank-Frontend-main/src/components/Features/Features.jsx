@@ -1,7 +1,7 @@
 import React from 'react';
-import { datasFeatures } from '../Assets/Data/datasFeatures.jsx';
+import { datasFeatures } from '../../Data/datasFeatures.jsx';
 
-import '../Assets/css/Features.css';
+import './features.css';
 
 const Features = () => {
 

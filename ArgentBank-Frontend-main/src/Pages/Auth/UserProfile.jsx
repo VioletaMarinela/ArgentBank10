@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import arrowRightImg from '../../Assets/img/arrow_right.png';
-import { accountuser } from '../../Assets/Data/account';
+import { accountuser } from '../../Data/account';
 import { accountService } from '../../_Service/accountService';
 import '../../Assets/css/User.css';
 

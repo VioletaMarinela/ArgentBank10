@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Home from '../Pages/Public/Home';
-import Signin from '../Pages/Public/Sign-in';
+import Signin from '../Pages/Public/Sign-in/Sign-in';
 import Error from '../Pages/Error';
 
 import UserProfile from '../Pages/Auth/UserProfile';
@@ -15,8 +15,8 @@ const PublicRouteur = () => {
             <Route element={<Layout />}>
                 <Route path='' element={<Navigate to="/home" />} />
                 <Route path='/home' element={<Home />} />
-                <Route path='/signin' element={<Signin />} />
-                <Route path='/userprofile' element={<UserProfile />} />
+                <Route path='/login' element={<Signin />} />
+                <Route path='/profile' element={<UserProfile />} />
 
                 <Route path="*" element={<Error />} />
             </Route>
