@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { accountService } from '../../../_Service/accountService';
 
-import './sign-in.css';
+import './index.css';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
@@ -57,10 +57,10 @@ const SignIn = () => {
 
 
     return (
-        <main class="main bg-dark">
-            <section class="sign-in-content">
+        <main className="main bg-dark">
+            <section className="sign-in-content">
 
-                <i class="fa fa-user-circle sign-in-icon"></i>
+                <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <div className="input-wrapper">
