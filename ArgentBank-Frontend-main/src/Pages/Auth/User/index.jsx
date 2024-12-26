@@ -1,5 +1,4 @@
-// UserProfile.js  
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { accountuser } from '../../../Data/account';
@@ -9,52 +8,54 @@ import './index.css';
 const UserProfile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loading, setloading] = useState(true);
-    const [error, seterror] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [firstName, setFirstName] = useState("");
-    const [lastName, setlastName] = useState("");
-    const [userName, setuserName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [userName, setUserName] = useState("");
+
+    // Définir setinfo en utilisant useCallback
+    const setinfo = useCallback(async () => {
+        const token = accountService.getToken();
+        const decodedToken = await accountService.getProfile(token);
+
+        if (decodedToken) {
+            setFirstName(decodedToken.firstName);
+            setLastName(decodedToken.lastName);
+            setUserName(decodedToken.userName);
+            dispatch({ type: "User/setUserProfile", payload: { userName: decodedToken.userName } });
+
+            setLoading(false);
+        } else {
+            setError(true);
+        }
+    }, [dispatch]);
 
     // Vérification de la connexion et récupération du profil utilisateur  
     useEffect(() => {
         if (!accountService.ConnectorNotConnect()) {
             navigate('/home');
         } else {
-            setinfo()
+            setinfo();
         }
-    }, [dispatch, navigate]);
+    }, [navigate, setinfo]);
 
-    const setinfo = async () => {
-        const token = accountService.getToken();
-        const decodetoken = await accountService.getProfile(token);
+    const reset = () => {
+        setIsEditing(false);
+        setUserName(userName);
+    };
 
-        if (decodetoken) {
-            setFirstName(decodetoken.firstName);
-            setlastName(decodetoken.lastName);
-            setuserName(decodetoken.userName);
-            dispatch({ type: "User/setUserProfile", payload: { userName: decodetoken.userName } })
+    const handleUpdate = () => {
+        update(userName);
+        setIsEditing(false);
+    };
 
-            setloading(false)
-        } else {
-            seterror(true)
-        }
-    }
-
-    let reset = () => {
-        setIsEditing(false)
-        setuserName(userName)
-    }
-
-    let handleUpdate = () => {
-        update(userName)
-        setIsEditing(false)
-    }
-
-    const update = async () => {
-        await accountService.updateprofile({ userName: userName })
-        dispatch({ type: "User/setUserProfile", payload: { userName: userName } })
-    }
+    const update = async (userName) => {
+        console.log(userName);
+        await accountService.updateprofile({ userName: userName });
+        dispatch({ type: "User/setUserProfile", payload: { userName: userName } });
+    };
 
     if (loading) {
         return <p>Loading...</p>;
@@ -65,14 +66,18 @@ const UserProfile = () => {
     }
 
     return (
-        <main className="main bg-dark">
+        <section className="userPage">
             <div className="header">
-
                 {
                     !isEditing &&
                     <div>
                         <h1>Welcome back<br />{firstName} {lastName}!</h1>
                         <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
+                    </div>
+                }
+                {
+                    isEditing &&
+                    <div>
                         <h1>Edit user info</h1>
                         <section className='update'>
                             <div className='input-update'>
@@ -86,7 +91,7 @@ const UserProfile = () => {
                                 </div>
                                 <div className="input-row">
                                     <label>User Name:</label>
-                                    <input type='text' value={userName} onChange={(e) => setuserName(e.target.value)} />
+                                    <input type='text' value={userName} onChange={(e) => setUserName(e.target.value)} />
                                 </div>
                             </div>
                             <div className='button-update'>
@@ -100,23 +105,26 @@ const UserProfile = () => {
             <h2 className="sr-only">Accounts</h2>
             {accountuser.length > 0 ? (
                 accountuser.map((account) => (
-                    <section className="account" key={account.title}>
-                        <div className="account-content-wrapper">
-                            <h3 className="account-title">{account.title}</h3>
-                            <p className="account-amount">{account.amount}</p>
-                            <p className="account-amount-description">{account.description}</p>
-                        </div>
-                        <div className="account-content-wrapper cta">
-                            <button className="transaction-button">View transactions</button>
-                        </div>
-                    </section>
+                    <Account key={account.title} account={account} navigate={navigate} />
                 ))
             ) : (
                 <p>No accounts available</p>
             )}
-        </main>
-
+        </section>
     );
 };
+
+const Account = ({ account, navigate }) => (
+    <section className="account">
+        <div className="account-content-wrapper">
+            <h3 className="account-title">{account.title}</h3>
+            <p className="account-amount">{account.amount}</p>
+            <p className="account-amount-description">{account.description}</p>
+        </div>
+        <div className="account-content-wrapper cta">
+            <button className="transaction-button" onClick={() => navigate(`/somepath/${account.title}`)}>View transactions</button>
+        </div>
+    </section>
+);
 
 export default UserProfile;

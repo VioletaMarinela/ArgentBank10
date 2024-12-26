@@ -4,11 +4,31 @@ html {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    max-width: 1440px;
 }
 
 body {
     margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     min-height: 100vh;
+}
+
+
+@media screen and (min-width:1440px) {
+    html {
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
 }

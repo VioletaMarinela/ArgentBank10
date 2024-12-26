@@ -1,12 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
-import AuthSliceReducer from './Slicer/AuthSlice';
-import UserSliceReducer from './Slicer/UserSlice';
+import { configureStore } from "@reduxjs/toolkit"
+
+import firstNameReducer from "./Features/firstName"
+import lastNameReducer from "./Features/lastName"
+import userNameReducer from "./Features/userName"
+import tokenReducer from "./Features/token"
 
 const store = configureStore({
     reducer: {
-        auth: AuthSliceReducer,
-        user: UserSliceReducer
-    }
-});
-
+        firstName: firstNameReducer,
+        lastName: lastNameReducer,
+        userName: userNameReducer,
+        token: tokenReducer
+    },
+})
 export default store;

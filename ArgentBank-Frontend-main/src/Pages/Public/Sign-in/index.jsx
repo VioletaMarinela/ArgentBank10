@@ -37,22 +37,15 @@ const SignIn = () => {
         };
 
         try {
-            accountService.loginConnect(formData)
-                .then((response) => {
-                    const token = response.data.body.token;
-                    accountService.savetoken(token);
-                    navigate("/profile", { replace: true })
-                })
-                .catch((error) => {
-                    setMessage(error)
-                    alert("Merci d'entrer une adressemail ou un mot de passe valide");
-                })
-        } catch (error) {
-            if (error.response) {
-                setMessage(error.response.data.message)
-            }
+            const response = await accountService.loginConnect(formData);
+            const token = response.data.body.token;
+            accountService.savetoken(token);
+            navigate("/profile", { replace: true });
         }
-
+        catch (error) {
+            if (error.response) { setMessage(error.response.data.message); }
+            else { setMessage("Une erreur s'est produite. Veuillez réessayer."); }
+        }
     };
 
 
