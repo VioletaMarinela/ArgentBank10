@@ -1,8 +1,6 @@
 import React from 'react';
 import { datasFeatures } from '../../Data/datasFeatures.jsx';
 
-import './index.css';
-
 const Features = () => {
 
     return (

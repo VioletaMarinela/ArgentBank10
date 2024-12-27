@@ -1,55 +1,54 @@
-import React from 'react';
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import Logo from '../../Assets/img/argentBankLogo.webp';
-import './header.css';
-import 'font-awesome/css/font-awesome.min.css';
-import { accountService } from '../../_Service/accountService';
+import { useDispatch, useSelector } from "react-redux";
+import logo from '../../Assets/img/argentBankLogo.webp';
+import { logout } from '../../Redux/Slicer/AuthSlice';
+import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+
+function Header() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userName = useSelector((state) => state.user.userName);
+    const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth.token);
 
-    const logout = () => {
-        accountService.logout();
-        navigate("/home");
+    const handleLogout = () => {
+        navigate('/')
+        // Dispatchez l'action de déconnexion ici
+        dispatch(logout());
     };
 
     return (
-        <header className="main-nav">
+        <nav className="main-nav">
+            <Link to="/" className="main-nav-logo">
+                <img
+                    className="main-nav-logo-image"
+                    src={logo}
+                    alt="Argent Bank Logo"
+                />
+                <h1 className="sr-only">Argent Bank</h1>
+            </Link>
+            <div>
+                {token ? (
+                    <div className="main-nav-auth">
+                        <div className="main-nav-auth-profil">{user.userName}</div>
+                        <div>
+                            <i className="fa-solid fa-user"></i>
+                            <i className="fa-solid fa-gear"></i>
+                        </div>
+                        {token && (
+                            <Link className="main-nav-item" to="/" onClick={handleLogout}>
+                                Logout
+                            </Link>
+                        )}
+                    </div>
 
-            <NavLink to="/home" className="main-nav-item">
-                <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
-            </NavLink>
-
-            {
-                accountService.ConnectorNotConnect() &&
-                <div className='userHeaderRight'>
-                    <NavLink to="/profile" className="main-nav-item">
-                        <span>{userName}</span>
-                    </NavLink>
-
-                    <NavLink to="/profile" className="main-nav-item">
+                ) : (
+                    <a className="main-nav-item" href={"./login"} >
                         <i className="fa fa-user-circle"></i>
-                    </NavLink>
-
-                    <i className="fas fa-cog"></i>
-
-                    <NavLink to="/home" onClick={logout} className="main-nav-item">
-                        <i className="fas fa-power-off"></i>
-                    </NavLink>
-                </div>
-            }
-            {
-                !accountService.ConnectorNotConnect() &&
-                <nav className='navaccueil'>
-                    <NavLink to="/login" className="main-nav-item">
-                        <i className="fa fa-user-circle" />
                         Sign In
-                    </NavLink>
-                </nav>
-            }
-        </header>
+                    </a>
+                )}
+            </div>
+        </nav>
     );
 };
 
