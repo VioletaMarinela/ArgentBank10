@@ -31,8 +31,11 @@ function Header() {
                     <div className="main-nav-auth">
                         <div className="main-nav-auth-profil">{user.userName}</div>
                         <div>
-                            <i className="fa-solid fa-user"></i>
-                            <i className="fa-solid fa-gear"></i>
+                            <Link className="main-nav-item" to="/profile">
+                                <i className="fa fa-solid fa-user"></i>
+                            </Link>
+
+                            <i className="fa fa-solid fa-gear"></i>
                         </div>
                         {token && (
                             <Link className="main-nav-item" to="/" onClick={handleLogout}>

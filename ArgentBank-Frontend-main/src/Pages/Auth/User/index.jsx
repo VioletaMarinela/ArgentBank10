@@ -35,7 +35,7 @@ const UserProfile = () => {
             <div className="header">
                 <div>
                     {error && <p>{error}</p>}
-                    {!isEditing && user && <h1>Welcome back<br />{user.userName}</h1>}
+                    {!isEditing && user && <h1>Welcome back<br />{user.firstName}</h1>}
                     {!isEditing && !user && <p>Loading user data...</p>}
                 </div>
                 {isEditing ? (

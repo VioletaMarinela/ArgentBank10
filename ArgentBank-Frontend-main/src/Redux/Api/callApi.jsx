@@ -55,7 +55,11 @@ export const fetchUserProfile = async (token, dispatch) => {
 
         if (response.ok) {
             const data = await response.json();
-            dispatch(setUser(data.body));
+            dispatch(setUser({
+                userName: data.body.userName,
+                firstName: data.body.firstName,
+                lastName: data.body.lastName
+            }));
             dispatch(setUsername(data.body.userName));
 
         } else {
