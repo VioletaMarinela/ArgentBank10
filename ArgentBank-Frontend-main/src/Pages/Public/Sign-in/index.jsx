@@ -26,7 +26,7 @@ const SignIn = () => {
     };
 
     return (
-        <div>
+        <div className='login'>
             <form onSubmit={handleSubmit}>
                 <div className="input-wrapper">
                     <label htmlFor="username" >Username</label>

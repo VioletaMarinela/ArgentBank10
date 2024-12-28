@@ -20,7 +20,7 @@ const EditUser = ({ onCancel }) => {
 
     const handleSaveButtonClick = async () => {
         await updateUsername(token, editedUsername, dispatch);
-        // Mettez à jour d'autres informations si nécessaire
+
 
         // Réinitialisez le champ d'édition et revenez à l'affichage du nom d'utilisateur
         setEditedUsername("");

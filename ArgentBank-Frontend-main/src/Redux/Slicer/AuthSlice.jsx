@@ -25,7 +25,7 @@ const authSlice = createSlice({
         setFirstName: (state, action) => {
             state.user.firstName = action.payload;
         },
-        setLirstName: (state, action) => {
+        setLastName: (state, action) => {
             state.user.lastName = action.payload;
         },
         logout: (state) => {

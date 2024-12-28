@@ -3,32 +3,48 @@ import EditUser from './editUser';
 import { accountuser } from '../../../Data/account';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserProfile } from '../../../Redux/Api/callApi';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
     const user = useSelector((state) => state.auth.user);
     const token = useSelector((state) => state.auth.token);
     const [isEditing, setIsEditing] = useState(false);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        if (!token) {
+            navigate('/home', { replace: true });
+            return;
+        }
+
         const fetchData = async () => {
             try {
+                setLoading(true);
                 await fetchUserProfile(token, dispatch);
+                setLoading(false);
             } catch (error) {
                 setError('Une erreur s\'est produite lors de la récupération du profil.');
                 console.error('Une erreur s\'est produite lors de la récupération du profil :', error);
+                setLoading(false);
             }
         };
 
-        if (token) {
-            fetchData();
-        }
+        fetchData();
+
     }, [token, dispatch]);
 
     const handleEditButtonClick = () => {
         setIsEditing(true);
     };
+
+    if (loading) {
+        return <div>Chargement...</div>;
+    }
 
     return (
         <main className="main bg-dark">

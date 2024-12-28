@@ -20,7 +20,7 @@ export const signIn = async (username, password, dispatch, navigate) => {
             body: JSON.stringify(data),
         });
 
-        if (response.ok) {
+        if (response) {
             // Extraction du token depuis la réponse JSON.
             const responseData = await response.json();
             const token = responseData.body.token;
@@ -49,11 +49,11 @@ export const fetchUserProfile = async (token, dispatch) => {
         };
 
         const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-            method: 'POST',
+            method: 'GET',
             headers: headers,
         });
 
-        if (response.ok) {
+        if (response) {
             const data = await response.json();
             dispatch(setUser({
                 userName: data.body.userName,

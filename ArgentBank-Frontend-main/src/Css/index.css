@@ -21,6 +21,13 @@ body {
     background-color: #12002b;
 }
 
+main.main.bg-dark {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .sr-only {
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
@@ -163,6 +170,16 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.login {
+    padding: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: #12002b;
+    height: 100vh;
+}
+
 .sign-in-button {
     display: block;
     width: 100%;
@@ -182,6 +199,7 @@ body {
     margin: 0 auto;
     margin-top: 3rem;
     padding: 2rem;
+    border-radius: 8px;
 }
 
 .sign-in-icon {
@@ -194,9 +212,12 @@ body {
 
 .input-remember label {
     margin-left: 0.25rem;
+    color: #fff;
 }
 
 .input-wrapper {
+    width: 100%;
+    align-self: center;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -205,6 +226,7 @@ body {
 
 .input-wrapper label {
     font-weight: bold;
+    color: #fff;
 }
 
 .input-wrapper input {
