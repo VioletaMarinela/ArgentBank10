@@ -32,7 +32,7 @@ function Header() {
                         <Link className="main-nav-item" to="/profile">
                             <FontAwesomeIcon icon={faUserCircle} />
                         </Link>
-                        <div className="main-nav-auth-profil">{user.firstName || 'User'}</div>
+                        <div className="main-nav-auth-profil">{user.userName || 'User'}</div>
 
                         <Link className="main-nav-item" to="/" onClick={handleLogout}>
                             <FontAwesomeIcon icon={faSignOut} />

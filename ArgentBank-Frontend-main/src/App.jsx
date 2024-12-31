@@ -2,7 +2,6 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Pages/Public/Home';
 import Signin from './Pages/Public/Sign-in';
 import Error from './Pages/Public/Error';
-
 import UserProfile from './Pages/Auth/User';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -20,7 +19,7 @@ function App() {
       </Routes>
       <Footer />
     </>
-  )
+  );
 }
 
 export default App;

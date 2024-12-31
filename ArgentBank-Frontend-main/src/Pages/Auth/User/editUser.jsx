@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUsername } from '../../../Redux/Api/callApi';
 
 const EditUser = ({ onCancel }) => {
-    const token = useSelector((state) => state.auth.token);
-    const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth?.token);
+    const user = useSelector((state) => state.auth?.user);
     const dispatch = useDispatch();
 
-    // Initialize state to avoid errors before user data is loaded  
     const [editedUsername, setEditedUsername] = useState(user?.userName || "");
     const [firstname, setFirstname] = useState(user?.firstName || "");
     const [lastname, setLastname] = useState(user?.lastName || "");
 
-    // Update editedUsername when user.userName changes  
     useEffect(() => {
         if (user) {
             setEditedUsername(user.userName);
