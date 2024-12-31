@@ -53,22 +53,28 @@ main.main.bg-dark {
 }
 
 .main-nav a {
-    font-weight: bold;
+    font-weight: 17px;
     color: #2c3e50;
+}
+
+.main-nav-auth {
+    font-size: 17px;
+    align-items: center;
+    color: #222;
 }
 
 .main-nav button {
     border: none;
-    font-weight: bold;
-    color: #42b983;
+    font-size: 17px;
+    color: #2c3e50;
     background-color: white;
 }
 
-.main-nav a.router-link-exact-active {
-    color: #42b983;
-}
+
 
 .main-nav-item {
+    font-size: 17px;
+    color: #2c3e50;
     text-decoration: none;
     margin-right: 0.5rem;
 }
@@ -212,7 +218,7 @@ main.main.bg-dark {
 
 .input-remember label {
     margin-left: 0.25rem;
-    color: #fff;
+    color: #12002b;
 }
 
 .input-wrapper {
@@ -375,22 +381,20 @@ main.main.bg-dark {
     width: 200px;
     display: flex;
     flex-direction: row;
+    color: #2c3e50;
 
 }
 
 .main-nav-auth-profil {
-    color: #42b983;
     font-size: 20px;
     margin-right: 10px;
 }
 
 .fa-user {
-    color: #42b983;
     margin-right: 10px;
 }
 
 .fa-gear {
-    color: #42b983;
     margin-right: 10px;
 }
 

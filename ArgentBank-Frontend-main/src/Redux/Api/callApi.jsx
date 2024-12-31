@@ -5,9 +5,8 @@ const headers = {
     "Content-Type": "application/json",
 };
 
-// Fonction pour la connexion de l'utilisateur.
+// Function for user sign-in  
 export const signIn = async (username, password, dispatch, navigate) => {
-    // Création de l'objet contenant les informations de connexion.
     const data = {
         email: username,
         password: password,
@@ -20,60 +19,59 @@ export const signIn = async (username, password, dispatch, navigate) => {
             body: JSON.stringify(data),
         });
 
-        if (response) {
-            // Extraction du token depuis la réponse JSON.
-            const responseData = await response.json();
-            const token = responseData.body.token;
-
-            // Dispatche le token dans le Redux store
-            dispatch(setToken(token));
-
-            navigate('/profile');
-        } else {
-            // Affiche une erreur en cas de problème avec la requête de connexion.
-            console.error('Erreur lors de la requête de connexion:', response.status, response.statusText);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Error during login: ${errorData.message}`);
         }
+
+        // Extract token from the response  
+        const responseData = await response.json();
+        const token = responseData.body.token;
+
+        // Dispatch the token into the Redux store  
+        dispatch(setToken(token));
+
+        // Fetch user profile after successful login  
+        await fetchUserProfile(token, dispatch);
+
+        navigate('/profile');
     } catch (error) {
-        // Affiche une erreur en cas d'erreur lors de l'exécution de la requête.
-        console.error("Erreur lors de la requête:", error);
+        console.error("Error during the request:", error);
     }
 };
 
-// Fonction pour récupérer le profil de l'utilisateur.
+// Function to fetch user profile  
 export const fetchUserProfile = async (token, dispatch) => {
     try {
-
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        };
-
         const response = await fetch('http://localhost:3001/api/v1/user/profile', {
             method: 'GET',
-            headers: headers,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                ...headers // Merge default headers  
+            },
         });
 
-        if (response) {
-            const data = await response.json();
-            dispatch(setUser({
-                userName: data.body.userName,
-                firstName: data.body.firstName,
-                lastName: data.body.lastName
-            }));
-            dispatch(setUsername(data.body.userName));
-
-        } else {
-            console.error('Erreur lors de la requête de profil:', response.status, response.statusText);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Error fetching profile: ${errorData.message}`);
         }
+
+        const data = await response.json();
+        // Dispatch user data to Redux store  
+        dispatch(setUser({
+            userName: data.body.userName,
+            firstName: data.body.firstName,
+            lastName: data.body.lastName,
+        }));
+
     } catch (error) {
-        console.error('Erreur lors de la requête:', error);
+        console.error('Error during the request:', error);
     }
 };
 
-// Fonction pour mettre à jour le nom d'utilisateur.
+// Function to update username  
 export const updateUsername = async (token, newUsername, dispatch) => {
     try {
-
         const response = await fetch("http://localhost:3001/api/v1/user/profile", {
             method: 'PUT',
             headers: {
@@ -83,14 +81,14 @@ export const updateUsername = async (token, newUsername, dispatch) => {
             body: JSON.stringify({ userName: newUsername }),
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            dispatch(setUsername(data.body.userName));
-        } else {
+        if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(`Erreur lors de la requête: ${errorData.message}`);
+            throw new Error(`Error updating username: ${errorData.message}`);
         }
+
+        const data = await response.json();
+        dispatch(setUsername(data.body.userName));
     } catch (error) {
-        console.error('Erreur lors de la requête:', error);
+        console.error('Error during the request:', error);
     }
 };

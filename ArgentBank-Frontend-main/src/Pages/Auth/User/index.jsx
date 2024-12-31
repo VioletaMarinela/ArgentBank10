@@ -36,7 +36,7 @@ const UserProfile = () => {
 
         fetchData();
 
-    }, [token, dispatch]);
+    }, [token, dispatch, navigate]);
 
     const handleEditButtonClick = () => {
         setIsEditing(true);
@@ -51,7 +51,7 @@ const UserProfile = () => {
             <div className="header">
                 <div>
                     {error && <p>{error}</p>}
-                    {!isEditing && user && <h1>Welcome back<br />{user.firstName}</h1>}
+                    {!isEditing && user && <h1>Welcome back<br />{user.firstName} {user.lastName}!</h1>}
                     {!isEditing && !user && <p>Loading user data...</p>}
                 </div>
                 {isEditing ? (

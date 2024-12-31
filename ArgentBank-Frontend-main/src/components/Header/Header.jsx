@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from '../../Assets/img/argentBankLogo.webp';
 import { logout } from '../../Redux/Slicer/AuthSlice';
 import { Link, useNavigate } from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.user);
-    const token = useSelector((state) => state.auth.token);
+    const user = useSelector((state) => state.auth?.user || {});
+    const token = useSelector((state) => state.auth?.token);
 
     const handleLogout = () => {
-        navigate('/')
-        // Dispatchez l'action de déconnexion ici
         dispatch(logout());
+        navigate('/');
     };
 
     return (
@@ -29,30 +29,25 @@ function Header() {
             <div>
                 {token ? (
                     <div className="main-nav-auth">
-                        <div className="main-nav-auth-profil">{user.userName}</div>
-                        <div>
-                            <Link className="main-nav-item" to="/profile">
-                                <i className="fa fa-solid fa-user"></i>
-                            </Link>
+                        <Link className="main-nav-item" to="/profile">
+                            <FontAwesomeIcon icon={faUserCircle} />
+                        </Link>
+                        <div className="main-nav-auth-profil">{user.firstName || 'User'}</div>
 
-                            <i className="fa fa-solid fa-gear"></i>
-                        </div>
-                        {token && (
-                            <Link className="main-nav-item" to="/" onClick={handleLogout}>
-                                Logout
-                            </Link>
-                        )}
+                        <Link className="main-nav-item" to="/" onClick={handleLogout}>
+                            <FontAwesomeIcon icon={faSignOut} />
+                            Sign Out
+                        </Link>
                     </div>
-
                 ) : (
-                    <a className="main-nav-item" href={"./login"} >
-                        <i className="fa fa-user-circle"></i>
+                    <Link className="main-nav-item" to="./login">
+                        <FontAwesomeIcon icon={faUserCircle} />
                         Sign In
-                    </a>
+                    </Link>
                 )}
             </div>
         </nav>
     );
-};
+}
 
 export default Header;
