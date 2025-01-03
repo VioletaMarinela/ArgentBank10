@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import logo from '../../Assets/img/argentBankLogo.webp';
+import logo from '../../Assets/img/logoAB.webp';
 import { logout } from '../../Redux/Slicer/AuthSlice';
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     const dispatch = useDispatch();
@@ -29,14 +29,14 @@ function Header() {
             <div>
                 {token ? (
                     <div className="main-nav-auth">
+                        <div className="main-nav-auth-profil">{user.userName || 'User'}</div>
                         <Link className="main-nav-item" to="/profile">
                             <FontAwesomeIcon icon={faUserCircle} />
+                            <i className="fa fa-regular fa-gear"></i>
                         </Link>
-                        <div className="main-nav-auth-profil">{user.userName || 'User'}</div>
 
                         <Link className="main-nav-item" to="/" onClick={handleLogout}>
-                            <FontAwesomeIcon icon={faSignOut} />
-                            Sign Out
+                            <FontAwesomeIcon icon={faPowerOff} />
                         </Link>
                     </div>
                 ) : (

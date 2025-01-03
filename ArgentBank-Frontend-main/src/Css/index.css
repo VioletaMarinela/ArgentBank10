@@ -54,19 +54,24 @@ main.main.bg-dark {
 
 .main-nav a {
     font-weight: 17px;
-    color: #2c3e50;
+    color: #61b37b;
 }
 
 .main-nav-auth {
     font-size: 17px;
     align-items: center;
-    color: #222;
+    color: #61b37b;
+    margin-right: 10px;
+}
+
+.main-nav-auth-profil {
+    margin-right: 10px;
 }
 
 .main-nav button {
     border: none;
     font-size: 17px;
-    color: #2c3e50;
+    color: #61b37b;
     background-color: white;
 }
 
@@ -74,9 +79,13 @@ main.main.bg-dark {
 
 .main-nav-item {
     font-size: 17px;
-    color: #2c3e50;
+    color: #00bc77;
     text-decoration: none;
     margin-right: 0.5rem;
+}
+
+.main-nav-item i {
+    margin-left: 10px;
 }
 
 .main-nav-item:hover {
@@ -364,6 +373,7 @@ main.main.bg-dark {
 .editProfilButtonContainer {
     margin-top: 15px;
     margin-bottom: 15px;
+    color: #61b37b;
 }
 
 .editProfilButton {
@@ -388,10 +398,12 @@ main.main.bg-dark {
 .main-nav-auth-profil {
     font-size: 20px;
     margin-right: 10px;
+    color: #61b37b;
 }
 
 .fa-user {
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 .fa-gear {
